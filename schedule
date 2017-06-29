@@ -1,0 +1,10 @@
+#! /bin/bash
+
+cd mail
+getmail
+if [ $? -ne 0 ]; then
+    alert/log "getmail failed."
+fi
+python3 schedule.py
+cd ..
+
