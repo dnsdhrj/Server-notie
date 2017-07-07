@@ -1,19 +1,13 @@
-from configparser import ConfigParser
 import time
 import os
 
-from emailparser import parse_email
+from mail.config import config
+from mail.emailparser import parse_email
 
 # prerequisite: new emails should be in inbox using 'getmail'
 
-config = ConfigParser()
-config.read('../config.ini')
-feed_loc = config['core']['DataLocation'] + config['email']['FeedLocation']
-inbox_loc = config['email']['InboxLocation']
-blacklist_loc = config['core']['DataLocation'] + config['email']['BlacklistFile']
-
-service_list = os.listdir(inbox_loc)
-with open(blacklist_loc) as file:
+service_list = os.listdir(config['inbox_loc'])
+with open(config['blacklist_loc']) as file:
     blacklist = file.readlines()
 
 
@@ -23,12 +17,13 @@ def _add_email_feed(file_loc, service_name):
         return
     if any(substr in email_info['Subject'] for substr in blacklist):
         return
-    with open(os.join(feed_loc, service_name), 'a', encoding='utf8') as f:
+    with open(os.join(config['feed_loc'], service_name), 'a', encoding='utf8') as f:
         line = '{}\t{}'.format(email_info['Subject'], email_info['From'])
         f.write(line)
 
 
 def _refresh_email_feed(service_name):
+    inbox_loc = config['inbox_loc']
     latest_file_loc = os.path.join(inbox_loc, service_name, 'latest')
     if os.path.isfile(latest_file_loc):
         with open(latest_file_loc) as f:

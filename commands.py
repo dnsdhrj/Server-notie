@@ -24,6 +24,6 @@ elif command == 'blackdel':
         print('Put arguments to delete in email blacklist.')
         exit()
     for word in sys.argv[2:argc]:
-        delete_blacklist(word)
+        remove_blacklist(word)
 elif command == 'clearemail':
     clear_feed()

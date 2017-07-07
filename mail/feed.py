@@ -1,13 +1,10 @@
-from configparser import ConfigParser
 import os
 
-
-config = ConfigParser()
-config.read('../config.ini')
-feed_loc = config['core']['DataLocation'] + config['email']['FeedLocation']
+from mail.config import config
 
 
 def clear_feed():
+    feed_loc = config['feed_loc']
     file_list = os.listdir(feed_loc)
     for filename in file_list:
         open(os.path.join(feed_loc, filename), 'w').close()
