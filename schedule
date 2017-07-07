@@ -2,7 +2,7 @@
 
 getmail --rcfile ~/.getmail/*rc
 if [ $? -ne 0 ]; then
-    alert/log "getmail failed."
+    python3 log.py "getmail failed."
 fi
-python3 -m  mail.schedule.py
+python3 schedule.py
 

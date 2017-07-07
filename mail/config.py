@@ -1,7 +1,7 @@
 from configparser import ConfigParser
 import os
 
-if 'config' not in locals():
+if 'config' not in globals():
     config = {}
     _configs = ConfigParser()
     _configs.read('config.ini')

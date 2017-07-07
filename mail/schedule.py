@@ -6,9 +6,7 @@ from mail.emailparser import parse_email
 
 # prerequisite: new emails should be in inbox using 'getmail'
 
-service_list = os.listdir(config['inbox_loc'])
-with open(config['blacklist_loc']) as file:
-    blacklist = file.readlines()
+blacklist = None
 
 
 def _add_email_feed(file_loc, service_name):
@@ -47,5 +45,9 @@ def _refresh_email_feed(service_name):
         f.write(recent_updated_str)
 
 
-for service in service_list:
-    _refresh_email_feed(service)
+def do_schedule():
+    global blacklist
+    with open(config['blacklist_loc']) as file:
+        blacklist = file.readlines()
+    for service in os.listdir(config['inbox_loc']):
+        _refresh_email_feed(service)
