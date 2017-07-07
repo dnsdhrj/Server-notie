@@ -1,10 +1,8 @@
 #! /bin/bash
 
-cd mail
-getmail
+getmail --rcfile ~/.getmail/*rc
 if [ $? -ne 0 ]; then
     alert/log "getmail failed."
 fi
-python3 schedule.py
-cd ..
+python3 -m  mail.schedule.py
 

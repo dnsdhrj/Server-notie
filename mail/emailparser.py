@@ -11,7 +11,11 @@ def _decode_header_unicode(s):
 def parse_email(filename):
     parser = Parser()
     with open(filename) as file:
-        header = parser.parse(file, headersonly=True)
+        try:
+            header = parser.parse(file, headersonly=True)
+        except UnicodeDecodeError:
+            print(filename)
+            return None
     decode_list = [
         'From',
         'Subject',

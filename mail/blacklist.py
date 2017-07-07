@@ -12,3 +12,9 @@ def remove_blacklist(word):
         blacklist = [x for x in blacklist if x != word]
         f.seek(0, 0)
         f.write(u'\n'.join(blacklist))
+
+
+def show_blacklist():
+    with open(config['blacklist_loc'], 'r', encoding='utf8') as f:
+        return f.read()
+
