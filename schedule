@@ -1,8 +1,13 @@
 #! /bin/bash
 
-getmail --rcfile ~/.getmail/*rc
-if [ $? -ne 0 ]; then
-    python3 log.py "getmail failed."
-fi
+services=( gmail naver snu )
+
+for x in "${services[@]}"
+do
+	getmail --rcfile ~/.getmail/"$x"rc
+	if [ $? -ne 0 ]; then
+    	python3 log.py "[getmail]  getmail on $x failed."
+	fi
+done
 python3 schedule.py
 

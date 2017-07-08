@@ -1,6 +1,8 @@
 from email.parser import Parser
 from email.header import decode_header
 
+from log import notie_log
+
 
 def _decode_header_unicode(s):
     return u''.join(
@@ -14,7 +16,7 @@ def parse_email(filename):
         try:
             header = parser.parse(file, headersonly=True)
         except UnicodeDecodeError:
-            print(filename)
+            notie_log('[emailparser] Ignored mail with strange encoding: {}'.format(filename))
             return None
     decode_list = [
         'From',
