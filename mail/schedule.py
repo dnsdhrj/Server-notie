@@ -18,7 +18,9 @@ def _add_email_feed(file_loc, service_name):
     if any(substr in email_info['Subject'] for substr in blacklist):
         return
     with open(os.path.join(config['feed_loc'], service_name), 'a', encoding='utf8') as f:
-        line = '{}%%%%{}\n'.format(email_info['Subject'], email_info['From'])
+        line = '{}%%%%{}'.format(email_info['Subject'], email_info['From'])
+        line.replace('\n', '')
+        line += '\n'
         f.write(line)
 
 
@@ -48,6 +50,6 @@ def _refresh_email_feed(service_name):
 def do_schedule():
     global blacklist
     with open(config['blacklist_loc']) as file:
-        blacklist = file.readlines()
+        blacklist = [line.rstrip() for line in file]
     for service in os.listdir(config['inbox_loc']):
         _refresh_email_feed(service)
