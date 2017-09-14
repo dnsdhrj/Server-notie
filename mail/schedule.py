@@ -18,8 +18,7 @@ def _add_email_feed(file_loc, service_name):
     if any(substr in email_info['Subject'] for substr in blacklist):
         return
     with open(os.path.join(config['feed_loc'], service_name), 'a', encoding='utf8') as f:
-        line = '{}%%%%{}'.format(email_info['Subject'], email_info['From'])
-        line.replace('\n', '')
+        line = '{}%%%%{}'.format(email_info['Subject'], email_info['From']).replace('\n', '')
         line += '\n'
         f.write(line)
 
