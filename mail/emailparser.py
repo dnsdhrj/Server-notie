@@ -22,4 +22,9 @@ def parse_email(filename):
         'From',
         'Subject',
     ]
-    return {item: _decode_header_unicode(header.get(item)) for item in decode_list}
+    try:
+        result = {item: _decode_header_unicode(header.get(item)) for item in decode_list}
+        return result
+    except:
+        notie_log('[emailparser] Ignored mail with strange encoding: {}'.format(filename))
+        return None
