@@ -3,7 +3,9 @@ import shutil
 import os
 
 config = ConfigParser()
-config.read(os.path.expanduser('~/records/notie/config.ini'))
+config.read('config.ini')
+if 'core' not in config:
+    config.read(os.path.expanduser('~/data/services/notie/config.ini'))
 feed_loc = os.path.expanduser(config['core']['DataLocation'] + config['email']['FeedLocation'])
 
 row, column = shutil.get_terminal_size()
@@ -63,3 +65,7 @@ def _display():
 
 
 _display()
+
+# console_scripts entrypoint
+def main():
+    pass

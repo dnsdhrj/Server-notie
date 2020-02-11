@@ -1,8 +1,8 @@
 import time
 import os
 
-from mail.config import config
-from mail.emailparser import parse_email
+from notie.mail.config import config
+from notie.mail.emailparser import parse_email
 
 # prerequisite: new emails should be in inbox using 'getmail'
 

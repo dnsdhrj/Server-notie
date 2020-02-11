@@ -1,7 +1,7 @@
 from email.parser import Parser
 from email.header import decode_header
 
-from log import notie_log
+from notie.log import notie_log
 
 
 def _decode_header_unicode(s):

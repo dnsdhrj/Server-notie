@@ -8,7 +8,9 @@ if 'logger' not in globals():
     logger.setLevel(logging.WARNING)
 
     config = ConfigParser()
-    config.read(os.path.expanduser('~/records/notie/config.ini'))
+    config.read('config.ini')
+    if 'core' not in config:
+        config.read(os.path.expanduser('~/data/services/notie/config.ini'))
     log_loc = os.path.expanduser(config['core']['LogLocation'])
     handler = logging.FileHandler(log_loc)
     handler.setLevel(logging.WARNING)

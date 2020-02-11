@@ -1,7 +1,8 @@
 import click
+import sys
 
-from mail.blacklist import add_blacklist, remove_blacklist, show_blacklist
-from mail.feed import clear_feed
+from notie.mail.blacklist import add_blacklist, remove_blacklist, show_blacklist
+from notie.mail.feed import clear_feed
 
 
 @click.group()
@@ -33,7 +34,6 @@ def blacklist():
 @cli.command(help='Clear all email notifications.')
 def clearemail():
     clear_feed()
-
 
 if __name__ == '__main__':
     cli()

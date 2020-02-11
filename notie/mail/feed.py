@@ -1,6 +1,6 @@
 import os
 
-from mail.config import config
+from notie.mail.config import config
 
 
 def clear_feed():
